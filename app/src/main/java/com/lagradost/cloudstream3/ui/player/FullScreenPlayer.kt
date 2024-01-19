@@ -106,6 +106,9 @@ open class FullScreenPlayer : AbstractPlayerFragment() {
     protected var fastForwardTime = 10000L
     protected var androidTVInterfaceOffSeekTime = 10000L
     protected var androidTVInterfaceOnSeekTime = 30000L
+    protected var shortSeekTime = 3000L
+    protected var mediumSeekTime = 10000L
+    protected var longSeekTime = 60000L
     protected var swipeHorizontalEnabled = false
     protected var swipeVerticalEnabled = false
     protected var playBackSpeedEnabled = false
@@ -289,7 +292,7 @@ open class FullScreenPlayer : AbstractPlayerFragment() {
             player.getCurrentPreferredSubtitle() == null
     }
 
-    private fun restoreOrientationWithSensor(activity: Activity){
+    private fun restoreOrientationWithSensor(activity: Activity) {
         val currentOrientation = activity.resources.configuration.orientation
         var orientation = 0
         when (currentOrientation) {
@@ -305,7 +308,7 @@ open class FullScreenPlayer : AbstractPlayerFragment() {
         activity.requestedOrientation = orientation
     }
 
-    private fun toggleOrientationWithSensor(activity: Activity){
+    private fun toggleOrientationWithSensor(activity: Activity) {
         val currentOrientation = activity.resources.configuration.orientation
         var orientation = 0
         when (currentOrientation) {
@@ -350,12 +353,11 @@ open class FullScreenPlayer : AbstractPlayerFragment() {
 
     private fun updateOrientation(ignoreDynamicOrientation: Boolean = false) {
         activity?.apply {
-            if(lockRotation) {
-                if(isLocked) {
+            if (lockRotation) {
+                if (isLocked) {
                     lockOrientation(this)
-                }
-                else {
-                    if(ignoreDynamicOrientation){
+                } else {
+                    if (ignoreDynamicOrientation) {
                         // restore when lock is disabled
                         restoreOrientationWithSensor(this)
                     } else {
@@ -583,6 +585,39 @@ open class FullScreenPlayer : AbstractPlayerFragment() {
         }
     }
 
+    private fun rewindVin(time: Long) {
+        try {
+            playerBinding?.apply {
+                playerCenterMenu.isGone = false
+                playerRewHolder.alpha = 1f
+
+                val rotateLeft = AnimationUtils.loadAnimation(context, R.anim.rotate_left)
+                exoRew.startAnimation(rotateLeft)
+
+                val goLeft = AnimationUtils.loadAnimation(context, R.anim.go_left)
+                goLeft.setAnimationListener(object : Animation.AnimationListener {
+                    override fun onAnimationStart(animation: Animation?) {}
+
+                    override fun onAnimationRepeat(animation: Animation?) {}
+
+                    override fun onAnimationEnd(animation: Animation?) {
+                        exoRewText.post {
+                            resetRewindText()
+                            playerCenterMenu.isGone = !isShowing
+                            playerRewHolder.alpha = if (isShowing) 1f else 0f
+                        }
+                    }
+                })
+                exoRewText.startAnimation(goLeft)
+                exoRewText.text =
+                    getString(R.string.rew_text_format).format(time / 1000)
+            }
+            player.seekTime(-time)
+        } catch (e: Exception) {
+            logError(e)
+        }
+    }
+
     private fun fastForward() {
         try {
             playerBinding?.apply {
@@ -611,6 +646,39 @@ open class FullScreenPlayer : AbstractPlayerFragment() {
                     getString(R.string.ffw_text_format).format(fastForwardTime / 1000)
             }
             player.seekTime(fastForwardTime)
+        } catch (e: Exception) {
+            logError(e)
+        }
+    }
+
+    private fun fastForwardVin(time: Long) {
+        try {
+            playerBinding?.apply {
+                playerCenterMenu.isGone = false
+                playerFfwdHolder.alpha = 1f
+
+                val rotateRight = AnimationUtils.loadAnimation(context, R.anim.rotate_right)
+                exoFfwd.startAnimation(rotateRight)
+
+                val goRight = AnimationUtils.loadAnimation(context, R.anim.go_right)
+                goRight.setAnimationListener(object : Animation.AnimationListener {
+                    override fun onAnimationStart(animation: Animation?) {}
+
+                    override fun onAnimationRepeat(animation: Animation?) {}
+
+                    override fun onAnimationEnd(animation: Animation?) {
+                        exoFfwdText.post {
+                            resetFastForwardText()
+                            playerCenterMenu.isGone = !isShowing
+                            playerFfwdHolder.alpha = if (isShowing) 1f else 0f
+                        }
+                    }
+                })
+                exoFfwdText.startAnimation(goRight)
+                exoFfwdText.text =
+                    getString(R.string.ffw_text_format).format(time / 1000)
+            }
+            player.seekTime(time)
         } catch (e: Exception) {
             logError(e)
         }
@@ -949,7 +1017,10 @@ open class FullScreenPlayer : AbstractPlayerFragment() {
                                         }
 
                                         else -> {
-                                            player.handleEvent(CSPlayerEvent.PlayPauseToggle, PlayerEventSource.UI)
+                                            player.handleEvent(
+                                                CSPlayerEvent.PlayPauseToggle,
+                                                PlayerEventSource.UI
+                                            )
                                         }
                                     }
                                 } else if (doubleTapEnabled && isFullScreenPlayer) {
@@ -1165,24 +1236,49 @@ open class FullScreenPlayer : AbstractPlayerFragment() {
                                 }
                             }
 
+                            KeyEvent.KEYCODE_Z -> {
+                                fastForwardVin(150000)
+                            }
+
                             KeyEvent.KEYCODE_DPAD_LEFT -> {
-                                if (!isShowing && !isLocked) {
-                                    player.seekTime(-androidTVInterfaceOffSeekTime)
+                                if (event.isShiftPressed) {
+                                    rewindVin(mediumSeekTime)
+                                    return true
+                                } else if (event.isAltPressed) {
+                                    rewindVin(longSeekTime)
+                                    return true
+                                } else if (!isShowing && !isLocked) {
+                                    rewindVin(shortSeekTime)
                                     return true
                                 } else if (playerBinding?.playerPausePlay?.isFocused == true) {
-                                    player.seekTime(-androidTVInterfaceOnSeekTime)
+                                    rewindVin(shortSeekTime)
                                     return true
                                 }
+
+//                                if (!isShowing && !isLocked) {
+//                                    player.seekTime(-3000)
+//                                    return true
+//                                } else if (playerBinding?.playerPausePlay?.isFocused == true) {
+//                                    player.seekTime(-3000)
+//                                    return true
+//                                }
                             }
 
                             KeyEvent.KEYCODE_DPAD_RIGHT -> {
-                                if (!isShowing && !isLocked) {
-                                    player.seekTime(androidTVInterfaceOffSeekTime)
+                                if (event.isShiftPressed) {
+                                    fastForwardVin(mediumSeekTime)
+                                    return true
+                                } else if (event.isAltPressed) {
+                                    fastForwardVin(longSeekTime)
+                                    return true
+                                } else if (!isShowing && !isLocked) {
+                                    fastForwardVin(shortSeekTime)
                                     return true
                                 } else if (playerBinding?.playerPausePlay?.isFocused == true) {
-                                    player.seekTime(androidTVInterfaceOnSeekTime)
+                                    fastForwardVin(shortSeekTime)
                                     return true
                                 }
+
                             }
                         }
                     }
@@ -1359,6 +1455,27 @@ open class FullScreenPlayer : AbstractPlayerFragment() {
                     settingsManager.getInt(
                         ctx.getString(R.string.android_tv_interface_on_seek_key),
                         10
+                    )
+                        .toLong() * 1000L
+
+                shortSeekTime =
+                    settingsManager.getInt(
+                        ctx.getString(R.string.short_seek_key),
+                        3
+                    )
+                        .toLong() * 1000L
+
+                mediumSeekTime =
+                    settingsManager.getInt(
+                        ctx.getString(R.string.medium_seek_key),
+                        3
+                    )
+                        .toLong() * 1000L
+
+                longSeekTime =
+                    settingsManager.getInt(
+                        ctx.getString(R.string.long_seek_key),
+                        3
                     )
                         .toLong() * 1000L
 

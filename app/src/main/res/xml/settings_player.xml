@@ -135,7 +135,7 @@
             app:defaultValue="10"
             app:icon="@drawable/go_forward_30"
             app:key="@string/double_tap_seek_time_key"
-            app:min="5"
+            app:min="1"
             app:seekBarIncrement="5"
             app:showSeekBarValue="true" />
     </PreferenceCategory>
@@ -176,7 +176,7 @@
             app:defaultValue="30"
             app:icon="@drawable/go_forward_30"
             app:key="@string/android_tv_interface_on_seek_key"
-            app:min="5"
+            app:min="1"
             app:seekBarIncrement="5"
             app:showSeekBarValue="true" />
         <SeekBarPreference
@@ -185,10 +185,37 @@
             android:title="@string/android_tv_interface_off_seek_settings"
             android:summary="@string/android_tv_interface_off_seek_settings_summary"
             app:adjustable="true"
+            app:defaultValue="3"
+            app:icon="@drawable/go_forward_30"
+            app:key="@string/short_seek_key"
+            app:min="1"
+            app:seekBarIncrement="5"
+            app:showSeekBarValue="true" />
+    </PreferenceCategory>
+    <PreferenceCategory
+        android:title="Vin Preferences">
+        <SeekBarPreference
+            android:defaultValue="10"
+            android:max="60"
+            android:title="Medium Seek"
+            android:summary="The seek amount when shift + right arrow is pressed."
+            app:adjustable="true"
             app:defaultValue="10"
             app:icon="@drawable/go_forward_30"
-            app:key="@string/android_tv_interface_off_seek_key"
-            app:min="5"
+            app:key="@string/medium_seek_key"
+            app:min="1"
+            app:seekBarIncrement="5"
+            app:showSeekBarValue="true" />
+        <SeekBarPreference
+            android:defaultValue="10"
+            android:max="180"
+            android:title="Long Seek"
+            android:summary="The seek amount when alt + right arrow is pressed."
+            app:adjustable="true"
+            app:defaultValue="60"
+            app:icon="@drawable/go_forward_30"
+            app:key="@string/long_seek_key"
+            app:min="30"
             app:seekBarIncrement="5"
             app:showSeekBarValue="true" />
     </PreferenceCategory>

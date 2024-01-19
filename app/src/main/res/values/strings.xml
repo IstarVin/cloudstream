@@ -35,6 +35,9 @@
     <string name="double_tap_seek_time_key" translatable="false">double_tap_seek_time_key2</string>
     <string name="android_tv_interface_off_seek_key" translatable="false">android_tv_interface_off_seek_key</string>
     <string name="android_tv_interface_on_seek_key" translatable="false">android_tv_interface_on_seek_key</string>
+    <string name="short_seek_key" translatable="false">short_seek_key</string>
+    <string name="medium_seek_key" translatable="false">medium_seek_key</string>
+    <string name="long_seek_key" translatable="false">long_seek_key</string>
     <string name="swipe_vertical_enabled_key" translatable="false">swipe_vertical_enabled_key</string>
     <string name="autoplay_next_key" translatable="false">autoplay_next_key</string>
     <string name="display_sub_key" translatable="false">display_sub_key</string>
