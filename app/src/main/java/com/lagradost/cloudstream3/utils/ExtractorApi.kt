@@ -96,13 +96,16 @@ import com.lagradost.cloudstream3.extractors.Moviesm4u
 import com.lagradost.cloudstream3.extractors.Mp4Upload
 import com.lagradost.cloudstream3.extractors.Mvidoo
 import com.lagradost.cloudstream3.extractors.MwvnVizcloudInfo
+import com.lagradost.cloudstream3.extractors.MyCloud
 import com.lagradost.cloudstream3.extractors.Neonime7n
 import com.lagradost.cloudstream3.extractors.Neonime8n
 import com.lagradost.cloudstream3.extractors.Odnoklassniki
 import com.lagradost.cloudstream3.extractors.TauVideo
 import com.lagradost.cloudstream3.extractors.SibNet
 import com.lagradost.cloudstream3.extractors.ContentX
+import com.lagradost.cloudstream3.extractors.EmturbovidExtractor
 import com.lagradost.cloudstream3.extractors.Hotlinger
+import com.lagradost.cloudstream3.extractors.FourCX
 import com.lagradost.cloudstream3.extractors.HDMomPlayer
 import com.lagradost.cloudstream3.extractors.HDPlayerSystem
 import com.lagradost.cloudstream3.extractors.VideoSeyred
@@ -150,6 +153,8 @@ import com.lagradost.cloudstream3.extractors.StreamSB8
 import com.lagradost.cloudstream3.extractors.StreamSB9
 import com.lagradost.cloudstream3.extractors.StreamTape
 import com.lagradost.cloudstream3.extractors.StreamTapeNet
+import com.lagradost.cloudstream3.extractors.StreamTapeXyz
+import com.lagradost.cloudstream3.extractors.StreamWishExtractor
 import com.lagradost.cloudstream3.extractors.StreamhideCom
 import com.lagradost.cloudstream3.extractors.StreamhideTo
 import com.lagradost.cloudstream3.extractors.Streamhub2
@@ -178,10 +183,12 @@ import com.lagradost.cloudstream3.extractors.VideoVard
 import com.lagradost.cloudstream3.extractors.VideovardSX
 import com.lagradost.cloudstream3.extractors.Vidgomunime
 import com.lagradost.cloudstream3.extractors.Vidgomunimesb
+import com.lagradost.cloudstream3.extractors.VidhideExtractor
 import com.lagradost.cloudstream3.extractors.Vidmoly
 import com.lagradost.cloudstream3.extractors.Vidmolyme
 import com.lagradost.cloudstream3.extractors.Vido
 import com.lagradost.cloudstream3.extractors.Vidplay
+import com.lagradost.cloudstream3.extractors.VidplayOnline
 import com.lagradost.cloudstream3.extractors.Vidstreamz
 import com.lagradost.cloudstream3.extractors.Vizcloud
 import com.lagradost.cloudstream3.extractors.Vizcloud2
@@ -210,6 +217,7 @@ import com.lagradost.cloudstream3.extractors.Ztreamhub
 import com.lagradost.cloudstream3.mvvm.logError
 import com.lagradost.cloudstream3.mvvm.normalSafeApiCall
 import kotlinx.coroutines.delay
+import me.xdrop.fuzzywuzzy.FuzzySearch
 import org.jsoup.Jsoup
 import java.net.URL
 import java.util.UUID
@@ -594,6 +602,18 @@ suspend fun loadExtractor(
         }
     }
 
+    // this is to match mirror domains - like example.com, example.net
+    for (extractor in extractorApis) {
+        if (FuzzySearch.partialRatio(
+                extractor.mainUrl,
+                currentUrl
+            ) > 80
+        ) {
+            extractor.getSafeUrl(currentUrl, referer, subtitleCallback, callback)
+            return true
+        }
+    }
+
     return false
 }
 
@@ -617,6 +637,7 @@ val extractorApis: MutableList<ExtractorApi> = arrayListOf(
     StreamTape(),
     StreamTapeNet(),
     ShaveTape(),
+    StreamTapeXyz(),
 
     //mixdrop extractors
     MixDropBz(),
@@ -681,6 +702,7 @@ val extractorApis: MutableList<ExtractorApi> = arrayListOf(
     SibNet(),
     ContentX(),
     Hotlinger(),
+    FourCX(),
     HDMomPlayer(),
     HDPlayerSystem(),
     VideoSeyred(),
@@ -824,6 +846,8 @@ val extractorApis: MutableList<ExtractorApi> = arrayListOf(
     PlayLtXyz(),
     AStreamHub(),
     Vidplay(),
+    VidplayOnline(),
+    MyCloud(),
 
     Cda(),
     Dailymotion(),
@@ -832,6 +856,9 @@ val extractorApis: MutableList<ExtractorApi> = arrayListOf(
     Rabbitstream(),
     Dokicloud(),
     Megacloud(),
+    VidhideExtractor(),
+    StreamWishExtractor(),
+    EmturbovidExtractor()
 )
 
 
