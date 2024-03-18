@@ -72,6 +72,7 @@
     <string name="enable_skip_op_from_database" translatable="false">enable_skip_op_from_database</string>
     <string name="rotate_video_key" translatable="false">rotate_video_key</string>
     <string name="auto_rotate_video_key" translatable="false">auto_rotate_video_key</string>
+    <string name="biometric_key" translatable="false">biometric_key</string>
     <!-- FORMAT MIGHT TRANSLATE, WILL CAUSE CRASH IF APPLIED WRONG -->
     <string name="extra_info_format" formatted="true" translatable="false">%d %s | %s</string>
     <string name="storage_size_format" formatted="true" translatable="false">%s • %s</string>
@@ -151,7 +152,7 @@
     <string name="download_done">Download Done</string>
     <string name="download_format" translatable="false">%s - %s</string>
     <string name="update_started">Update Started</string>
-    <string name="stream">Stream</string>
+    <string name="stream">Network stream</string>
     <string name="error_loading_links_toast">Error Loading Links</string>
     <string name="links_reloaded_toast">Links Reloaded</string>
     <string name="download_storage_text">Internal Storage</string>
@@ -176,7 +177,11 @@
     <string name="sort_close">Close</string>
     <string name="sort_clear">Clear</string>
     <string name="sort_save">Save</string>
-    <string name="copyTitle">Title copied!</string>
+    <string name="repo_copy_label">Repository name and URL</string>
+    <string name="toast_copied">copied!</string>
+    <string name="subscribe_tooltip">New episode notification</string>
+    <string name="result_search_tooltip">Search in other extensions</string>
+    <string name="recommendations_tooltip">Show recommendations</string>
     <string name="player_speed">Player Speed</string>
     <string name="subtitles_settings">Subtitle Settings</string>
     <string name="subs_text_color">Text Color</string>
@@ -216,8 +221,8 @@
     <string name="player_subtitles_settings_des">Player subtitles settings</string>
     <string name="chromecast_subtitles_settings">Chromecast Subtitles</string>
     <string name="chromecast_subtitles_settings_des">Chromecast subtitles settings</string>
-    <string name="eigengraumode_settings">Eigengravy Mode</string>
-    <string name="eigengraumode_settings_des">Adds a speed option in the player</string>
+    <string name="eigengraumode_settings">Playback speed</string>
+    <string name="speed_setting_summary">Adds a speed option in the player</string>
     <string name="swipe_to_seek_settings">Swipe to seek</string>
     <string name="swipe_to_seek_settings_des">Swipe from side to side to control your position in a video</string>
     <string name="swipe_to_change_settings">Swipe to change settings</string>
@@ -246,7 +251,7 @@
     <string name="backup_failed_error_format">Error backing up %s</string>
     <string name="search">Search</string>
     <string name="library">Library</string>
-    <string name="category_account">Accounts</string>
+    <string name="category_account">Accounts and Security</string>
     <string name="category_updates">Updates and backup</string>
     <string name="settings_info">Info</string>
     <string name="advanced_search">Advanced Search</string>
@@ -305,6 +310,7 @@
     <string name="go_forward_30">+30</string>
     <string name="delete_message" formatted="true">This will permanently delete %s\nAre you sure?</string>
     <string name="resume_time_left" formatted="true">%dm\nremaining</string>
+    <string name="resume_remaining" formatted="true">%s\nremaining</string>
     <string name="status_ongoing">Ongoing</string>
     <string name="status_completed">Completed</string>
     <string name="status">Status</string>
@@ -394,9 +400,9 @@
     <string name="video_disk_description">Causes problems if set too high on devices with low storage space, such as Android TV.</string>
     <string name="dns_pref">DNS over HTTPS</string>
     <string name="dns_pref_summary">Useful for bypassing ISP blocks</string>
-    <string name="jsdelivr_proxy">raw.githubusercontent.com Proxy</string>
+    <string name="jsdelivr_proxy">GitHub Proxy</string>
     <string name="jsdelivr_enabled">Could not reach GitHub. Turning on jsDelivr proxy…</string>
-    <string name="jsdelivr_proxy_summary">Bypasses blocking of GitHub using jsDelivr. May cause updates to be delayed by few days.</string>
+    <string name="jsdelivr_proxy_summary">Bypass blocking of raw github URLs using jsDelivr. May cause updates to be delayed by few days.</string>
     <string name="add_site_pref">Clone site</string>
     <string name="remove_site_pref">Remove site</string>
     <string name="add_site_summary">Add a clone of an existing site, with a different URL</string>
@@ -442,13 +448,15 @@
     <string name="category_general">General</string>
     <string name="random_button_settings">Random Button</string>
     <string name="random_button_settings_desc">Show random button on Homepage and Library</string>
-    <string name="provider_lang_settings">Provider languages</string>
+    <string name="provider_lang_settings">Extension languages</string>
     <string name="app_layout">App Layout</string>
     <string name="preferred_media_settings">Preferred media</string>
-    <string name="enable_nsfw_on_providers">Enable NSFW on supported providers</string>
+    <string name="enable_nsfw_on_providers">Enable NSFW on supported Extensions</string>
     <string name="subtitles_encoding">Subtitle encoding</string>
     <string name="category_providers">Providers</string>
     <string name="category_provider_test">Provider test</string>
+    <string name="test_extensions">Test all Extensions</string>
+    <string name="test_extensions_summary">This Test is meant for developers only and does not verifies or denies working of any extension.</string>
     <string name="category_ui">Layout</string>
     <string name="automatic">Auto</string>
     <string name="tv_layout">TV layout</string>
@@ -465,11 +473,11 @@
     <string name="opensubtitles_key" translatable="false">opensubtitles_key</string>
     <string name="nginx_key" translatable="false">nginx_key</string>
     <string name="example_password">password123</string>
-    <string name="example_username">MyCoolUsername</string>
+    <string name="example_username">Username</string>
     <string name="example_email">hello@world.com</string>
     <string name="example_ip">127.0.0.1</string>
-    <string name="example_site_name">MyCoolSite</string>
-    <string name="example_site_url">example.com</string>
+    <string name="example_site_name">NewSiteName</string>
+    <string name="example_site_url">https://example.com</string>
     <string name="example_lang_name">Language code (en)</string>
     <!--
     <string name="mal_account_settings" translatable="false">MAL</string>
@@ -561,8 +569,8 @@
     <string name="subtitles_filter_lang">Filter by preferred media language</string>
     <string name="extras">Extras</string>
     <string name="trailer">Trailer</string>
-    <string name="network_adress_example">Link to stream</string>
-    <string name="referer">Referer</string>
+    <string name="network_adress_example">https://example.com/example.mp4</string>
+    <string name="referer">Referer (optional)</string>
     <string name="next">Next</string>
     <string name="provider_languages_tip">Watch videos in these languages</string>
     <string name="previous">Previous</string>
@@ -596,8 +604,6 @@
     <string name="plugins_not_downloaded" formatted="true">Not downloaded: %d</string>
     <string name="plugins_updated" formatted="true">Updated %d plugins</string>
     <string name="blank_repo_message">CloudStream has no sites installed by default. You need to install the sites from repositories.
-\n
-\nBecause of a brainless DMCA takedown by Sky UK Limited 🤮 we cannot link the repository site in app.
 \n
 \nJoin our Discord or search online.</string>
     <string name="view_public_repositories_button">View community repositories</string>
@@ -644,6 +650,8 @@
     <string name="history">History</string>
     <string name="enable_skip_op_from_database_des">Show skip popups for opening/ending</string>
     <string name="clipboard_too_large">Too much text. Unable to save to clipboard.</string>
+    <string name="clipboard_permission_error">Error accessing Clipboard, Please try again.</string>
+    <string name="clipboard_unknown_error">Error copying, Please copy logcat and contact app support.</string>
     <string name="action_mark_as_watched">Mark as watched</string>
     <string name="action_remove_from_watched">Remove from watched</string>
     <string name="confirm_exit_dialog">Are you sure you want to exit\?</string>
@@ -744,4 +752,17 @@
     <string name="rotate_video_desc">Display a toggle button for screen orientation</string>
     <string name="auto_rotate_video_desc">Enable automatic switching of screen orientation based on video orientation</string>
     <string name="auto_rotate_video">Auto rotate</string>
+    <string name="favorite">Favorite</string>
+    <string name="unfavorite">Unfavorite</string>
+    <!-- For Biometrics -->
+    <string name="biometric_authentication_title">Unlock CloudStream</string>
+    <string name="biometric_setting">Lock with Biometrics</string>
+    <string name="password_pin_authentication_title">Password/PIN Authentication</string>
+    <string name="biometric_unsupported">Biometric authentication is not supported on this device</string>
+    <string name="biometric_setting_summary">Unlock the app with Fingerprint, Face ID, PIN, Pattern and Password.</string>
+    <string name="biometric_prompt_description">This window will close after few failed attempts. You\'ll have to restart the App.</string>
+    <string name="biometric_warning">Your CloudStream data has been backed up now, although probability of this rare case is very low but all
+        devices behave differently, in case you get locked down from accessing the app in worst case scenario,
+    Clear the app data wholly and restore the backup. Any inconvenience if arrived is deeply regretted.</string>
+
 </resources>
