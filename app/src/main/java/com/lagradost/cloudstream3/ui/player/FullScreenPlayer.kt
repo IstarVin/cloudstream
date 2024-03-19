@@ -1461,14 +1461,14 @@ open class FullScreenPlayer : AbstractPlayerFragment() {
                 mediumSeekTime =
                     settingsManager.getInt(
                         ctx.getString(R.string.medium_seek_key),
-                        3
+                        15
                     )
                         .toLong() * 1000L
 
                 longSeekTime =
                     settingsManager.getInt(
                         ctx.getString(R.string.long_seek_key),
-                        3
+                        90
                     )
                         .toLong() * 1000L
 
