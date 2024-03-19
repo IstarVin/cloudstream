@@ -201,6 +201,18 @@
             android:layout_height="match_parent"
             android:padding="16dp">
 
+            <Button
+                android:id="@+id/small_skip"
+                android:text="Button"
+                android:layout_width="53dp"
+                android:layout_height="38dp"
+                android:background="#00FFFFFF"
+                android:visibility="gone"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="->"
+                tools:visibility="gone" />
+
             <com.google.android.material.button.MaterialButton
                 android:id="@+id/skip_chapter_button"
                 style="@style/NiceButton"

@@ -83,7 +83,8 @@ open class FullScreenPlayer : AbstractPlayerFragment() {
     protected open var isFullScreenPlayer = true
     protected var playerBinding: PlayerCustomLayoutBinding? = null
 
-    private var durationMode : Boolean by UserPreferenceDelegate("duration_mode", false)
+    private var durationMode: Boolean by UserPreferenceDelegate("duration_mode", false)
+
     // state of player UI
     protected var isShowing = false
     protected var isLocked = false
@@ -1536,6 +1537,10 @@ open class FullScreenPlayer : AbstractPlayerFragment() {
         }
 
         playerBinding?.apply {
+            smallSkip.setOnClickListener {
+                fastForwardVin(shortSeekTime)
+            }
+
             playerPausePlay.setOnClickListener {
                 autoHide()
                 player.handleEvent(CSPlayerEvent.PlayPauseToggle)
@@ -1672,7 +1677,7 @@ open class FullScreenPlayer : AbstractPlayerFragment() {
 
     private fun setRemainingTimeCounter(showRemaining: Boolean) {
         durationMode = showRemaining
-        playerBinding?.exoDuration?.isInvisible= showRemaining
+        playerBinding?.exoDuration?.isInvisible = showRemaining
         playerBinding?.timeLeft?.isVisible = showRemaining
     }
 
