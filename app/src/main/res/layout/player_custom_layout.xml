@@ -122,12 +122,38 @@
             <TextView
                 android:id="@+id/small_skip"
                 android:text=" "
-                android:layout_width="39dp"
+                android:layout_width="349dp"
                 android:layout_height="28dp"
                 android:focusable="false"
                 android:focusableInTouchMode="false"
                 android:visibility="visible"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/medium_skip"
+                android:text=" "
+                android:layout_width="349dp"
+                android:layout_height="28dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:visibility="visible"
+                android:layout_marginTop="32dp"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:visibility="visible" />
+
+            <TextView
+                android:id="@+id/long_skip"
+                android:text=" "
+                android:layout_width="296dp"
+                android:layout_height="43dp"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:visibility="visible"
+                android:layout_marginStart="80dp"
+                app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent"
                 tools:visibility="visible" />
 
