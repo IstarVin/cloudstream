@@ -1540,6 +1540,24 @@ open class FullScreenPlayer : AbstractPlayerFragment() {
                 fastForwardVin(shortSeekTime)
             }
 
+            smallSkip.setOnLongClickListener {
+                setPlayBackSpeed(2f)
+                true
+            }
+
+            mediumSkip.setOnClickListener {
+                fastForwardVin(mediumSeekTime)
+            }
+
+            mediumSkip.setOnLongClickListener {
+                setPlayBackSpeed(2f)
+                true
+            }
+
+            longSkip.setOnClickListener {
+                fastForwardVin(longSeekTime)
+            }
+
             playerPausePlay.setOnClickListener {
                 autoHide()
                 player.handleEvent(CSPlayerEvent.PlayPauseToggle)
