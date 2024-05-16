@@ -27,6 +27,7 @@ import androidx.core.view.isGone
 import androidx.core.view.isInvisible
 import androidx.core.view.isVisible
 import androidx.core.widget.doOnTextChanged
+import androidx.lifecycle.lifecycleScope
 import androidx.preference.PreferenceManager
 import com.lagradost.cloudstream3.CommonActivity.keyEventListener
 import com.lagradost.cloudstream3.CommonActivity.playerEventListener
@@ -57,6 +58,8 @@ import com.lagradost.cloudstream3.utils.UIHelper.showSystemUI
 import com.lagradost.cloudstream3.utils.UIHelper.toPx
 import com.lagradost.cloudstream3.utils.UserPreferenceDelegate
 import com.lagradost.cloudstream3.utils.Vector2
+import kotlinx.coroutines.delay
+import kotlinx.coroutines.launch
 import kotlin.math.*
 
 const val MINIMUM_SEEK_TIME = 7000L         // when swipe seeking
@@ -1536,23 +1539,26 @@ open class FullScreenPlayer : AbstractPlayerFragment() {
         }
 
         playerBinding?.apply {
+            mediumSkip.setOnTouchListener { _, event -> when(event.action) {
+                MotionEvent.ACTION_DOWN -> {
+                    setPlayBackSpeed(2f)
+                    true
+                }
+                MotionEvent.ACTION_UP -> {
+                    setPlayBackSpeed(1f)
+                    true
+                }
+
+                else -> {false}
+            } }
+
             smallSkip.setOnClickListener {
                 fastForwardVin(shortSeekTime)
             }
 
-            smallSkip.setOnLongClickListener {
-                setPlayBackSpeed(2f)
-                true
-            }
-
-            mediumSkip.setOnClickListener {
-                fastForwardVin(mediumSeekTime)
-            }
-
-            mediumSkip.setOnLongClickListener {
-                setPlayBackSpeed(2f)
-                true
-            }
+//            mediumSkip.setOnClickListener {
+//                fastForwardVin(mediumSeekTime)
+//            }
 
             longSkip.setOnClickListener {
                 fastForwardVin(longSeekTime)
