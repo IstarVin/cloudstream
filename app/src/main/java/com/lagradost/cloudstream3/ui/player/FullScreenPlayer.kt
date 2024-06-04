@@ -1284,6 +1284,19 @@ open class FullScreenPlayer : AbstractPlayerFragment() {
                                 }
 
                             }
+
+                            KeyEvent.KEYCODE_S -> {
+                                setPlayBackSpeed(2f)
+                                return true
+                            }
+                        }
+                    }
+                    KeyEvent.ACTION_UP -> {
+                        when(keyCode) {
+                            KeyEvent.KEYCODE_S -> {
+                                setPlayBackSpeed(1f)
+                                return true
+                            }
                         }
                     }
                 }
