@@ -8,7 +8,6 @@ import com.lagradost.cloudstream3.utils.EpisodeSkip
 import com.lagradost.cloudstream3.utils.ExtractorLink
 
 enum class PlayerEventType(val value: Int) {
-    //Stop(-1),
     Pause(0),
     Play(1),
     SeekForward(2),
@@ -26,6 +25,7 @@ enum class PlayerEventType(val value: Int) {
     Resize(13),
     SearchSubtitlesOnline(14),
     SkipOp(15),
+    Restart(16),
 }
 
 enum class CSPlayerEvent(val value: Int) {
@@ -39,6 +39,7 @@ enum class CSPlayerEvent(val value: Int) {
     PrevEpisode(6),
     PlayPauseToggle(7),
     ToggleMute(8),
+    Restart(9),
 }
 
 enum class CSPlayerLoading {

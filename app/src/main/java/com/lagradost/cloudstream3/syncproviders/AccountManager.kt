@@ -22,6 +22,7 @@ abstract class AccountManager(private val defIndex: Int) : AuthAPI {
         val addic7ed = Addic7ed()
         val subDlApi = SubDlApi(0)
         val localListApi = LocalList()
+        val subSourceApi = SubSourceApi()
 
         // used to login via app intent
         val OAuth2Apis
@@ -51,25 +52,26 @@ abstract class AccountManager(private val defIndex: Int) : AuthAPI {
             get() = listOf(
                 openSubtitlesApi,
                 addic7ed,
-                subDlApi
+                subDlApi,
+                subSourceApi
             )
 
-        const val appString = "cloudstreamapp"
-        const val appStringRepo = "cloudstreamrepo"
-        const val appStringPlayer = "cloudstreamplayer"
+        const val APP_STRING = "cloudstreamapp"
+        const val APP_STRING_REPO = "cloudstreamrepo"
+        const val APP_STRING_PLAYER = "cloudstreamplayer"
 
         // Instantly start the search given a query
-        const val appStringSearch = "cloudstreamsearch"
+        const val APP_STRING_SEARCH = "cloudstreamsearch"
 
         // Instantly resume watching a show
-        const val appStringResumeWatching = "cloudstreamcontinuewatching"
+        const val APP_STRING_RESUME_WATCHING = "cloudstreamcontinuewatching"
 
         val unixTime: Long
             get() = System.currentTimeMillis() / 1000L
         val unixTimeMs: Long
             get() = System.currentTimeMillis()
 
-        const val maxStale = 60 * 10
+        const val MAX_STALE = 60 * 10
 
         fun secondsToReadable(seconds: Int, completedValue: String): String {
             var secondsLong = seconds.toLong()

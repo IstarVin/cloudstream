@@ -208,7 +208,7 @@
     <string name="go_back_30">-30</string>
     <string name="go_forward_30">+30</string>
     <string name="delete_message" formatted="true">這將永遠刪除 %s
-\n你確定嗎\?</string>
+\n你確定嗎?</string>
     <string name="resume_time_left" formatted="true">剩下
 \n%d 分鐘</string>
     <string name="status_ongoing">連載中</string>
@@ -355,7 +355,7 @@
     <string name="upload_sync">同步</string>
     <string name="sync_score">評分</string>
     <string name="sync_score_format" formatted="true">%d / 10</string>
-    <string name="sync_total_episodes_none">/\?\?</string>
+    <string name="sync_total_episodes_none">/??</string>
     <string name="sync_total_episodes_some" formatted="true">/%d</string>
     <string name="authenticated_user" formatted="true">%s 已驗證</string>
     <string name="authenticated_user_fail" formatted="true">無法在 %s 登入</string>
@@ -671,4 +671,5 @@
     <string name="battery_dialog_message">為了確保下載與通知已訂閱的電視節目的不間斷，CloudStream 需要取得在背景執行的權限。若點選「確定」，將移至「應用程式資訊」，請找到「應用程式電池使用」並將電池用量設置為「無限制」。請注意，取得此權限並不表示 CS3 會明顯增加電池用量，而是只在必要時在背景執行，例如取得通知或使用官方擴充功能下載影片時。若選擇「取消」，您可以稍後在「一般設定」中調整此設定。</string>
     <string name="cs3wiki">CloudStream Wiki</string>
     <string name="biometric_unsupported">此裝置不支援生物特徵認證</string>
+    <string name="hide_player_control_names_key" translatable="false">hide_player_control_names_key</string>
 </resources>

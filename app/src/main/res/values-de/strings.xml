@@ -195,7 +195,7 @@
     <string name="go_back_30">-30</string>
     <string name="go_forward_30">+30</string>
     <string name="delete_message" formatted="true">Dadurch wird %s permanent gelöscht
-\nBist du dir sicher\?</string>
+\nBist du dir sicher?</string>
     <string name="resume_time_left" formatted="true">%dm
 \nverbleibend</string>
     <string name="status_ongoing">Laufend</string>
@@ -319,7 +319,7 @@
     <string name="upload_sync">Sync</string>
     <string name="sync_score">Bewertung</string>
     <string name="sync_score_format" formatted="true">%d / 10</string>
-    <string name="sync_total_episodes_none">/\?\?</string>
+    <string name="sync_total_episodes_none">/??</string>
     <string name="sync_total_episodes_some" formatted="true">/%d</string>
     <string name="authenticated_user" formatted="true">%s authentifiziert</string>
     <string name="authenticated_user_fail" formatted="true">Die Authentifizierung bei %s ist fehlgeschlagen</string>
@@ -388,7 +388,7 @@
     <string name="skip_setup">Einrichtung überspringen</string>
     <string name="app_layout_subtext">Aussehen der App passend zu dem des Geräts ändern</string>
     <string name="crash_reporting_title">Absturzmeldung</string>
-    <string name="preferred_media_subtext">Was möchten Sie sehen\?</string>
+    <string name="preferred_media_subtext">Was möchtest du sehen?</string>
     <string name="setup_done">Fertig</string>
     <string name="extensions">Erweiterungen</string>
     <string name="add_repository">Repository hinzufügen</string>
@@ -423,7 +423,7 @@
     <string name="video_tracks">Videospuren</string>
     <string name="apply_on_restart">Starte die App neu, um die Änderungen zu sehen.</string>
     <string name="safe_mode_title">Abgesicherter Modus aktiviert</string>
-    <string name="safe_mode_description">Alle Erweiterungen wurden aufgrund eines Absturzes deaktiviert, damit Sie diejenige finden können, welche Probleme verursacht.</string>
+    <string name="safe_mode_description">Alle Erweiterungen wurden aufgrund eines Absturzes deaktiviert, damit die fehlerhafte Erweiterung ausfindig gemacht werden kann.</string>
     <string name="safe_mode_crash_info">Absturzinfo ansehen</string>
     <string name="extension_rating" formatted="true">Bewertung: %s</string>
     <string name="extension_description">Beschreibung</string>
@@ -473,7 +473,7 @@
     <string name="pref_category_ui_features">Funktionen</string>
     <string name="plugins_updated" formatted="true">%d Plugins aktualisiert</string>
     <string name="action_mark_as_watched">Als gesehen markieren</string>
-    <string name="confirm_exit_dialog">Sind Sie sicher, dass Sie die App beenden möchten\?</string>
+    <string name="confirm_exit_dialog">Sicher, dass die App beendet werden soll?</string>
     <string name="yes">Ja</string>
     <string name="no">Nein</string>
     <string name="update_notification_downloading">App-Update wird heruntergeladen…</string>
@@ -615,4 +615,31 @@
     <string name="reset_btn">Zurücksetzen</string>
     <string name="app_unrestricted_toast">Akkuverbrauch der App ist bereits auf unbeschränkt eingestellt</string>
     <string name="app_info_intent_error">CloudStreams App-Info kann nicht geöffnet werden.</string>
+    <string name="hide_player_control_names_key" translatable="false">hide_player_control_names_key</string>
+    <string name="next_season_episode_format" formatted="true">Staffel %1$d Episode %2$d wird veröffentlicht in</string>
+    <string name="episode_upcoming_format" formatted="true">Wird veröffentlicht in %s</string>
+    <string name="player_settings_play_in_fcast">Fcast</string>
+    <string name="pref_category_security">Sicherheit</string>
+    <string name="pref_category_accounts">Konten</string>
+    <string name="open_downloaded_repo">Repository öffnen</string>
+    <string name="device_pin_url_message">Besuche<b>%s</b> auf dem Smartphone oder Computer und gebe den obenstehenden Code ein</string>
+    <string name="device_pin_error_message">PIN-Code vom Gerät nicht abrufbar, versuche lokale Authentifizierung</string>
+    <string name="downloads_empty">Zur Zeit sind keine Downloads verfügbar.</string>
+    <string name="open_local_video">Lokales Video öffnen</string>
+    <string name="auth_locally">Lokale Auth</string>
+    <string name="dismiss">Verwerfen</string>
+    <string name="qr_image">QR-Code Bild</string>
+    <string name="player_settings_select_cast_device">Cast-Gerät auswählen</string>
+    <string name="delete_plugin">Plugin löschen</string>
+    <string name="device_pin_expired_message">PIN-Code ist jetzt abgelaufen!</string>
+    <string name="hide_player_control_names">Namen von Player-Steuerelementen ausblenden</string>
+    <string name="episode_action_cast_mirror">Cast-Mirror</string>
+    <string name="test_warning">Warnung</string>
+    <string name="device_pin_counter_text">Code läuft ab in %1$dm %2$ds</string>
+    <string name="cs3wiki">CloudStream-Wiki</string>
+    <string name="battery_dialog_message">Um einen unterbrechungsfreien Download zu gewährleisten und Benachrichtigungen für abonnierte TV-Shows anzuzeigen, benötigt Cloudstream die Berechtigung, im Hintergrund ausgeführt zu werden. Beim klicken auf 𝙊𝙆, öffnet sich das Info-Fenster der App, scrolle hier zu 𝘼𝙠𝙠𝙪𝙣𝙪𝙩𝙯𝙪𝙣𝙜 𝙙𝙚𝙧 𝘼𝙥𝙥 und stelle den Akkuverbrauch auf 𝙐𝙣𝙚𝙞𝙣𝙜𝙚𝙨𝙘𝙝𝙧𝙖𝙚𝙣𝙠𝙩. Bitte beachte, dass dies nicht dazu führt, dass CS3 den Akku dauerhaft entlädt. Es läuft nur im Hintergrund, wenn es nötig ist, beispielsweise zum Empfang von Benachrichtigungen oder dem Download von Videos aus offiziellen Erweiterungen. Diese Einstellung kann später in den 𝘼𝙡𝙡𝙜𝙚𝙢𝙚𝙞𝙣𝙚𝙣 𝙀𝙞𝙣𝙨𝙩𝙚𝙡𝙡𝙪𝙣𝙜𝙚𝙣 angepasst werden.</string>
+    <string name="delete_files">Dateien löschen</string>
+    <string name="delete_format" formatted="true">Löschen (%1$d | %2$s)</string>
+    <string name="select_all">Alle auswählen</string>
+    <string name="deselect_all">Alle abwählen</string>
 </resources>

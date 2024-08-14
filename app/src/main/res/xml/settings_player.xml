@@ -37,6 +37,12 @@
             android:icon="@drawable/ic_baseline_text_format_24"
             android:key="@string/prefer_limit_title_rez_key"
             android:title="@string/limit_title_rez" />
+        <SwitchPreference
+            android:icon="@drawable/ic_baseline_text_format_24"
+            android:key="@string/hide_player_control_names_key"
+            android:title="@string/hide_player_control_names"
+            android:defaultValue="false"
+            />
     </PreferenceCategory>
 
     <PreferenceCategory
@@ -98,6 +104,12 @@
             app:defaultValue="false"
             android:summary="@string/auto_rotate_video_desc"
             app:key="@string/auto_rotate_video_key" />
+        <SwitchPreference
+            android:icon="@drawable/preview_seekbar_24"
+            android:title="@string/preview_seekbar"
+            app:defaultValue="true"
+            android:summary="@string/preview_seekbar_desc"
+            app:key="@string/preview_seekbar_key" />
     </PreferenceCategory>
     
     <PreferenceCategory

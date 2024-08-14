@@ -1,6 +1,7 @@
 package com.lagradost.cloudstream3.ui.player
 
 import android.util.Log
+import androidx.media3.common.util.UnstableApi
 import com.lagradost.cloudstream3.APIHolder.getApiFromNameNull
 import com.lagradost.cloudstream3.APIHolder.unixTime
 import com.lagradost.cloudstream3.LoadResponse
@@ -28,6 +29,7 @@ class RepoLinkGenerator(
     }
 
     override val hasCache = true
+    override val canSkipLoading = true
 
     override fun hasNext(): Boolean {
         return currentIndex < episodes.size - 1

@@ -411,7 +411,7 @@
     <string name="episode_action_chromecast_mirror">Chromecast mirror</string>
     <string name="nginx_url_pref">Σύνδεσμος NGINX σέρβερ</string>
     <string name="example_site_name">ΝεοΟνομαΙστοτοπου</string>
-    <string name="sync_total_episodes_none">/\?\?</string>
+    <string name="sync_total_episodes_none">/??</string>
     <string name="sync_total_episodes_some" formatted="true">/%d</string>
     <string name="sync_score_format" formatted="true">%d / 10</string>
     <string name="clear_history">Εκκαθάριση ιστορικού</string>
@@ -625,4 +625,5 @@
     <string name="biometric_warning">Τα δεδομένα σας στο CloudStream έχουν κάνει back up. Αν και η πιθανότητα είναι πολύ χαμηλή, όλες οι συσκευές συμπεριφέρονται διαφορετικά. Στη σπάνια περίπτωση, που απαγορευτεί η πρόσβασή σας από την εφαρμογή, διαγράψτε τα δεδομένα εφαρμογής και επαναφέρετέ τα από ένα ήδη υπάρχον backup. Συγνώμη για οποιαδήποτε ταλαιπωρία.</string>
     <string name="pref_category_accounts">Λογαριασμοί</string>
     <string name="pref_category_security">Ασφάλεια</string>
+    <string name="hide_player_control_names_key" translatable="false">hide_player_control_names_key</string>
 </resources>

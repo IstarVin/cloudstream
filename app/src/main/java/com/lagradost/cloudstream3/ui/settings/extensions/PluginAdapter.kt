@@ -1,9 +1,11 @@
 package com.lagradost.cloudstream3.ui.settings.extensions
 
+import android.annotation.SuppressLint
 import android.text.format.Formatter.formatShortFileSize
 import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.annotation.VisibleForTesting
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.view.isGone
 import androidx.core.view.isVisible
@@ -27,12 +29,12 @@ import com.lagradost.cloudstream3.utils.SubtitleHelper.fromTwoLettersToLanguage
 import com.lagradost.cloudstream3.utils.SubtitleHelper.getFlagFromIso
 import com.lagradost.cloudstream3.utils.UIHelper.setImage
 import com.lagradost.cloudstream3.utils.UIHelper.toPx
-import org.junit.Assert
-import org.junit.Test
 import java.text.DecimalFormat
 import kotlin.math.floor
 import kotlin.math.log10
-
+import kotlin.math.pow
+import org.junit.Test
+import org.junit.Assert
 
 data class PluginViewData(
     val plugin: Plugin,
@@ -101,6 +103,8 @@ class PluginAdapter(
             return findClosestBase2(target, current * 2, max)
         }
 
+        // DO NOT MOVE, as running this test will result in ExceptionInInitializerError on prerelease due to static variables using Resources.getSystem()
+        // this test function is only to show how the function works
         @Test
         fun testFindClosestBase2() {
             Assert.assertEquals(16, findClosestBase2(0))
@@ -122,10 +126,7 @@ class PluginAdapter(
             val base = value / 3
             return if (value >= 3 && base < suffix.size) {
                 DecimalFormat("#0.00").format(
-                    numValue / Math.pow(
-                        10.0,
-                        (base * 3).toDouble()
-                    )
+                    numValue / 10.0.pow((base * 3).toDouble())
                 ) + suffix[base]
             } else {
                 DecimalFormat().format(numValue)
@@ -136,6 +137,7 @@ class PluginAdapter(
     inner class PluginViewHolder(val binding: RepositoryItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
+        @SuppressLint("SetTextI18n")
         fun bind(
             data: PluginViewData,
         ) {

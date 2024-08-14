@@ -6,6 +6,7 @@ import android.app.Dialog
 import android.content.Context
 import android.content.Intent
 import android.content.res.ColorStateList
+import android.os.Build
 import android.os.Bundle
 import android.util.Log
 import android.view.LayoutInflater
@@ -13,6 +14,7 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.*
 import androidx.activity.result.contract.ActivityResultContracts
+import androidx.annotation.OptIn
 import androidx.core.animation.addListener
 import androidx.core.content.ContextCompat
 import androidx.core.view.isGone
@@ -21,6 +23,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.preference.PreferenceManager
 import androidx.media3.common.Format.NO_VALUE
 import androidx.media3.common.MimeTypes
+import androidx.media3.common.util.UnstableApi
 import com.lagradost.cloudstream3.*
 import com.lagradost.cloudstream3.APIHolder.getApiFromNameNull
 import com.lagradost.cloudstream3.AcraApplication.Companion.setKey
@@ -44,6 +47,7 @@ import com.lagradost.cloudstream3.ui.player.source_priority.QualityDataHelper
 import com.lagradost.cloudstream3.ui.player.source_priority.QualityProfileDialog
 import com.lagradost.cloudstream3.ui.result.*
 import com.lagradost.cloudstream3.ui.settings.Globals.EMULATOR
+import com.lagradost.cloudstream3.ui.settings.Globals.PHONE
 import com.lagradost.cloudstream3.ui.settings.Globals.TV
 import com.lagradost.cloudstream3.ui.settings.Globals.isLayout
 import com.lagradost.cloudstream3.ui.subtitles.SUBTITLE_AUTO_SELECT_KEY
@@ -62,6 +66,7 @@ import com.lagradost.cloudstream3.utils.UIHelper.popCurrentPage
 import com.lagradost.cloudstream3.utils.UIHelper.toPx
 import com.lagradost.safefile.SafeFile
 import kotlinx.coroutines.Job
+import java.io.Serializable
 import java.util.*
 import kotlin.math.abs
 
@@ -158,6 +163,7 @@ class GeneratorPlayer : FullScreenPlayer() {
     }
 
     override fun playerStatusChanged() {
+        super.playerStatusChanged()
         if (player.getIsPlaying()) {
             viewModel.forceClearCache = false
         }
@@ -232,7 +238,7 @@ class GeneratorPlayer : FullScreenPlayer() {
 
     private fun closestQuality(target: Int?): Qualities {
         if (target == null) return Qualities.Unknown
-        return Qualities.values().minBy { abs(it.value - target) }
+        return Qualities.entries.minBy { abs(it.value - target) }
     }
 
     private fun getLinkPriority(
@@ -365,8 +371,6 @@ class GeneratorPlayer : FullScreenPlayer() {
 
         binding.subtitleAdapter.choiceMode = AbsListView.CHOICE_MODE_SINGLE
         binding.subtitleAdapter.adapter = arrayAdapter
-        val adapter =
-            binding.subtitleAdapter.adapter as? ArrayAdapter<AbstractSubtitleEntities.SubtitleEntity>
 
         binding.subtitleAdapter.setOnItemClickListener { _, _, position, _ ->
             currentSubtitle = currentSubtitles.getOrNull(position) ?: return@setOnItemClickListener
@@ -377,8 +381,8 @@ class GeneratorPlayer : FullScreenPlayer() {
 
         fun setSubtitlesList(list: List<AbstractSubtitleEntities.SubtitleEntity>) {
             currentSubtitles = list
-            adapter?.clear()
-            adapter?.addAll(currentSubtitles)
+            arrayAdapter.clear()
+            arrayAdapter.addAll(currentSubtitles)
         }
 
         val currentTempMeta = getMetaData()
@@ -520,7 +524,7 @@ class GeneratorPlayer : FullScreenPlayer() {
         //TODO: Set year text from currently loaded movie on Player
         //dialog.subtitles_search_year?.setText(currentTempMeta.year)
     }
-
+    @OptIn(UnstableApi::class)
     private fun openSubPicker() {
         try {
             subsPathPicker.launch(
@@ -793,7 +797,6 @@ class GeneratorPlayer : FullScreenPlayer() {
                         settingsManager.edit().putString(
                             ctx.getString(R.string.subtitles_encoding_key), prefValues[it]
                         ).apply()
-
                         updateForcedEncoding(ctx)
                         dismiss()
                         player.seekTime(-1) // to update subtitles, a dirty trick
@@ -1096,8 +1099,15 @@ class GeneratorPlayer : FullScreenPlayer() {
         }
 
         playerBinding?.playerSkipOp?.isVisible = isOpVisible
-        playerBinding?.playerSkipEpisode?.isVisible =
-            !isOpVisible && viewModel.hasNextEpisode() == true
+
+        when {
+            isLayout(PHONE) ->
+                playerBinding?.playerSkipEpisode?.isVisible =
+                    !isOpVisible && viewModel.hasNextEpisode() == true
+
+            else ->
+                playerBinding?.playerGoForward?.isVisible = viewModel.hasNextEpisode() == true
+        }
 
         if (percentage >= PRELOAD_NEXT_EPISODE_PERCENTAGE) {
             viewModel.preLoadNextLinks()
@@ -1253,7 +1263,7 @@ class GeneratorPlayer : FullScreenPlayer() {
     fun setPlayerDimen(widthHeight: Pair<Int, Int>?) {
         val extra = if (widthHeight != null) {
             val (width, height) = widthHeight
-            "${width}x${height}"
+            "- ${width}x${height}"
         } else {
             ""
         }
@@ -1264,7 +1274,7 @@ class GeneratorPlayer : FullScreenPlayer() {
             0 -> ""
             1 -> extra
             2 -> source
-            3 -> "$source - $extra"
+            3 -> "$source $extra"
             else -> ""
         }
         playerBinding?.playerVideoTitleRez?.apply {
@@ -1281,7 +1291,7 @@ class GeneratorPlayer : FullScreenPlayer() {
     private fun unwrapBundle(savedInstanceState: Bundle?) {
         Log.i(TAG, "unwrapBundle = $savedInstanceState")
         savedInstanceState?.let { bundle ->
-            sync.addSyncs(bundle.getSerializable("syncData") as? HashMap<String, String>?)
+            sync.addSyncs(bundle.getSafeSerializable<HashMap<String, String>>("syncData"))
         }
     }
 
@@ -1289,7 +1299,8 @@ class GeneratorPlayer : FullScreenPlayer() {
         inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?
     ): View? {
         // this is used instead of layout-television to follow the settings and some TV devices are not classified as TV for some reason
-        layout = if (isLayout(TV or EMULATOR)) R.layout.fragment_player_tv else R.layout.fragment_player
+        layout =
+            if (isLayout(TV or EMULATOR)) R.layout.fragment_player_tv else R.layout.fragment_player
 
         viewModel = ViewModelProvider(this)[PlayerGeneratorViewModel::class.java]
         sync = ViewModelProvider(this)[SyncViewModel::class.java]
@@ -1451,7 +1462,7 @@ class GeneratorPlayer : FullScreenPlayer() {
 
         observe(viewModel.currentLinks) {
             currentLinks = it
-            val turnVisible = it.isNotEmpty()
+            val turnVisible = it.isNotEmpty() && lastUsedGenerator?.canSkipLoading == true
             val wasGone = binding?.overlayLoadingSkipButton?.isGone == true
             binding?.overlayLoadingSkipButton?.isVisible = turnVisible
 
@@ -1497,3 +1508,6 @@ class GeneratorPlayer : FullScreenPlayer() {
         }
     }
 }
+
+@Suppress("DEPRECATION")
+inline fun <reified T : Serializable> Bundle.getSafeSerializable(key: String) : T? = if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU) getSerializable(key) as? T else getSerializable(key, T::class.java)
