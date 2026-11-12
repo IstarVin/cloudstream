@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!-- Kept in its own file (not strings.xml) so merging upstream never conflicts with the cast feature -->
+<resources>
+    <string name="remote_cast_receiver_key" translatable="false">remote_cast_receiver_key</string>
+    <item name="remote_cast_receiver_container" type="id" />
+
+    <!-- Settings (TV) -->
+    <string name="remote_cast_receiver_title">Allow casting to this device</string>
+    <string name="remote_cast_receiver_summary">Lets CloudStream on your phone control playback on this device. CloudStream has to be open on this device.</string>
+
+    <!-- Pairing, shown on the TV -->
+    <string name="remote_cast_pin_title">Pair with phone</string>
+    <string name="remote_cast_pin_message">%1$s wants to cast to this device.\n\nEnter this PIN on your phone:\n\n%2$s</string>
+
+    <!-- Cast button chooser, shown on the phone -->
+    <string name="remote_cast_chooser_title">Cast to</string>
+    <string name="remote_cast_option_chromecast">Chromecast</string>
+    <string name="remote_cast_option_cloudstream">CloudStream TV</string>
+    <string name="remote_cast_option_disconnect">Disconnect from %s</string>
+    <string name="remote_cast_select_device">Select a CloudStream TV</string>
+    <string name="remote_cast_searching">Searching for devices…</string>
+    <string name="remote_cast_enter_ip">Enter IP address…</string>
+    <string name="remote_cast_enter_ip_title">TV IP address</string>
+    <string name="remote_cast_enter_pin_title">Enter PIN</string>
+    <string name="remote_cast_enter_pin_message">Enter the PIN shown on %s</string>
+    <string name="remote_cast_wrong_pin">Wrong PIN, try again</string>
+    <string name="remote_cast_connecting">Connecting to %s…</string>
+    <string name="remote_cast_connected">Connected to %s</string>
+    <string name="remote_cast_connection_failed">Could not connect to %s</string>
+    <string name="remote_cast_disconnected">Disconnected from the TV</string>
+    <string name="remote_cast_reconnecting">Connection lost, reconnecting…</string>
+    <string name="remote_cast_unsupported_link">This source can\'t be cast to a CloudStream TV</string>
+    <string name="remote_cast_no_local_files">Downloaded files can\'t be cast, disconnect from the TV to play them</string>
+    <string name="remote_cast_change_on_phone">Use CloudStream on your phone to change this</string>
+    <string name="remote_cast_tv_stopped">Playback was stopped on the TV</string>
+</resources>

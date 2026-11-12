@@ -6,6 +6,7 @@ import android.widget.ImageView
 import androidx.annotation.OptIn
 import androidx.annotation.StringRes
 import androidx.media3.common.util.UnstableApi
+import com.lagradost.cloudstream3.cast.remote.RemoteCast
 import androidx.media3.session.MediaSession
 import androidx.media3.ui.SubtitleView
 import androidx.viewbinding.ViewBinding
@@ -36,7 +37,7 @@ abstract class AbstractPlayerFragment<T : ViewBinding>(
 ) : BaseFragment<T>(bindingCreator), PlayerView.Callbacks {
 
     // Stored pre-initialization so subclasses can set them before onBindingCreated.
-    private var _player: IPlayer = CS3IPlayer()
+    private var _player: IPlayer = RemoteCast.createPlayerOrNull() ?: CS3IPlayer()
 
     /** The shared [PlayerView] host that owns all player state and view references. */
     protected var playerHostView: PlayerView? = null

@@ -30,6 +30,7 @@ import com.discord.panels.PanelState
 import com.discord.panels.PanelsChildGestureRegionObserver
 import com.google.android.gms.cast.framework.CastButtonFactory
 import com.google.android.gms.cast.framework.CastContext
+import com.lagradost.cloudstream3.cast.remote.RemoteCastUi
 import com.google.android.material.bottomsheet.BottomSheetDialog
 import com.google.android.material.button.MaterialButton
 import com.lagradost.cloudstream3.APIHolder
@@ -678,7 +679,8 @@ open class ResultFragmentPhone : BaseFragment<FragmentResultSwipeBinding>(
                             CastContext.getSharedInstance(act.applicationContext) {
                                 it.run()
                             }.addOnCompleteListener {
-                                isGone = !it.isSuccessful
+                                // Also used for casting to a CloudStream TV, so it always stays visible
+                                isGone = false
                             }
                             // this shit leaks for some reason
                             //castContext.addCastStateListener { state ->
@@ -688,6 +690,12 @@ open class ResultFragmentPhone : BaseFragment<FragmentResultSwipeBinding>(
                             logError(e)
                         }
                     }
+                    RemoteCastUi.setUpCastButton(
+                        act,
+                        this,
+                        chromecastSupported = chromecastSupport,
+                        chromecastAvailable = act.isCastApiAvailable()
+                    )
                 }
             }
         }

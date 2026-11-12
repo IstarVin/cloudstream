@@ -633,7 +633,7 @@ class PlayerView @JvmOverloads constructor(
     }
 
     private fun playerUpdated(player: Any?) {
-        if (player is ExoPlayer) {
+        if (player is androidx.media3.common.Player) {
             mMediaSession?.release()
             mMediaSession = MediaSession.Builder(context, player)
                 // Ensure unique ID for concurrent players.

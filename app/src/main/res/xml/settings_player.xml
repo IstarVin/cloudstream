@@ -63,6 +63,12 @@
             android:title="@string/source_priority"
             app:key="@string/player_source_priority_key"/>
         <SwitchPreference
+            android:icon="@drawable/ic_baseline_tv_24"
+            android:summary="@string/remote_cast_receiver_summary"
+            android:title="@string/remote_cast_receiver_title"
+            app:defaultValue="true"
+            app:key="@string/remote_cast_receiver_key" />
+        <SwitchPreference
             android:icon="@drawable/ic_baseline_picture_in_picture_alt_24"
             android:summary="@string/picture_in_picture_des"
             android:title="@string/picture_in_picture"

@@ -17,6 +17,7 @@ import com.lagradost.cloudstream3.ui.settings.SettingsFragment.Companion.getFold
 import com.lagradost.cloudstream3.ui.settings.SettingsFragment.Companion.getPref
 import com.lagradost.cloudstream3.ui.settings.SettingsFragment.Companion.hideOn
 import com.lagradost.cloudstream3.ui.settings.SettingsFragment.Companion.hidePrefs
+import com.lagradost.cloudstream3.cast.remote.RemoteCastReceiver
 import com.lagradost.cloudstream3.ui.settings.SettingsFragment.Companion.setPaddingBottom
 import com.lagradost.cloudstream3.ui.settings.SettingsFragment.Companion.setToolBarScrollFlags
 import com.lagradost.cloudstream3.ui.settings.SettingsFragment.Companion.setUpToolbar
@@ -55,6 +56,13 @@ class SettingsPlayer : BasePreferenceFragmentCompat() {
 
         getPref(R.string.preview_seekbar_key)?.hideOn(TV)
         getPref(R.string.pref_category_android_tv_key)?.hideOn(PHONE)
+        getPref(R.string.remote_cast_receiver_key)?.apply {
+            hideOn(PHONE)
+            setOnPreferenceChangeListener { _, enabled ->
+                if (enabled == true) RemoteCastReceiver.start(requireContext()) else RemoteCastReceiver.stop()
+                true
+            }
+        }
 
         getPref(R.string.video_buffer_length_key)?.setOnPreferenceClickListener {
             val prefNames = resources.getStringArray(R.array.video_buffer_length_names)

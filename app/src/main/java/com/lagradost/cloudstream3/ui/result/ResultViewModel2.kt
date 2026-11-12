@@ -52,6 +52,7 @@ import com.lagradost.cloudstream3.TvType
 import com.lagradost.cloudstream3.VPNStatus
 import com.lagradost.cloudstream3.actions.AlwaysAskAction
 import com.lagradost.cloudstream3.actions.VideoClickActionHolder
+import com.lagradost.cloudstream3.cast.remote.RemoteCast
 import com.lagradost.cloudstream3.amap
 import com.lagradost.cloudstream3.isEpisodeBased
 import com.lagradost.cloudstream3.isLiveStream
@@ -1422,6 +1423,11 @@ class ResultViewModel2 : ViewModel() {
                     if (ctx.isConnectedToChromecast()) {
                         handleEpisodeClickEvent(
                             click.copy(action = ACTION_CHROME_CAST_EPISODE)
+                        )
+                    } else if (RemoteCast.isActive) {
+                        // Connected to a CloudStream TV, the in app player is what controls it
+                        handleEpisodeClickEvent(
+                            click.copy(action = ACTION_PLAY_EPISODE_IN_PLAYER)
                         )
                     } else {
                         val action = getPlayerAction(ctx)

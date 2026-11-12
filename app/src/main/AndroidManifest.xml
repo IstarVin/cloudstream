@@ -244,6 +244,16 @@
             </intent-filter>
         </activity>
 
+        <!-- Player shown on a TV while a phone is casting to it -->
+        <activity
+            android:name=".cast.remote.RemoteCastReceiverActivity"
+            android:configChanges="orientation|screenSize|smallestScreenSize|screenLayout|keyboard|keyboardHidden|navigation"
+            android:exported="false"
+            android:launchMode="singleTop"
+            android:screenOrientation="userLandscape"
+            android:supportsPictureInPicture="false"
+            tools:ignore="DiscouragedApi" />
+
         <receiver
             android:name=".receivers.VideoDownloadRestartReceiver"
             android:enabled="false"

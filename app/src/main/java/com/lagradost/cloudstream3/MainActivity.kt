@@ -77,6 +77,7 @@ import com.lagradost.cloudstream3.CommonActivity.showToast
 import com.lagradost.cloudstream3.CommonActivity.updateLocale
 import com.lagradost.cloudstream3.CommonActivity.updateTheme
 import com.lagradost.cloudstream3.actions.temp.fcast.FcastManager
+import com.lagradost.cloudstream3.cast.remote.RemoteCastReceiver
 import com.lagradost.cloudstream3.databinding.ActivityMainBinding
 import com.lagradost.cloudstream3.databinding.ActivityMainTvBinding
 import com.lagradost.cloudstream3.databinding.BottomResultviewPreviewBinding
@@ -728,6 +729,7 @@ class MainActivity : AppCompatActivity(), ColorPickerDialogListener, BiometricCa
         this.sendBroadcast(broadcastIntent)
         afterPluginsLoadedEvent -= ::onAllPluginsLoaded
         detachBackPressedCallback("MainActivityDefault")
+        if (isFinishing) RemoteCastReceiver.stop()
         super.onDestroy()
     }
 
@@ -1994,6 +1996,7 @@ class MainActivity : AppCompatActivity(), ColorPickerDialogListener, BiometricCa
         //}
 
         FcastManager().init(this, false)
+        RemoteCastReceiver.startIfEnabled(this)
 
         APIRepository.dubStatusActive = getApiDubstatusSettings()
 

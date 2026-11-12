@@ -448,7 +448,7 @@ class GeneratorPlayer : FullScreenPlayer() {
         }
 
         // setup the notification when starting the player
-        if (player is ExoPlayer) {
+        if (player is androidx.media3.common.Player) {
             val ctx = context ?: return
             getMediaNotification(ctx).apply {
                 setPlayer(player)
